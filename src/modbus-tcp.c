@@ -667,12 +667,7 @@ int modbus_tcp_accept(modbus_t *ctx, int *s)
     }
 
     addrlen = sizeof(addr);
-#ifdef HAVE_ACCEPT4
-    /* Inherit socket flags and use accept4 call */
-    ctx->s = accept4(*s, (struct sockaddr *)&addr, &addrlen, SOCK_CLOEXEC);
-#else
     ctx->s = accept(*s, (struct sockaddr *)&addr, &addrlen);
-#endif
 
     if (ctx->s == -1) {
         return -1;
@@ -697,12 +692,7 @@ int modbus_tcp_pi_accept(modbus_t *ctx, int *s)
     }
 
     addrlen = sizeof(addr);
-#ifdef HAVE_ACCEPT4
-    /* Inherit socket flags and use accept4 call */
-    ctx->s = accept4(*s, (struct sockaddr *)&addr, &addrlen, SOCK_CLOEXEC);
-#else
     ctx->s = accept(*s, (struct sockaddr *)&addr, &addrlen);
-#endif
 
     if (ctx->s == -1) {
         return -1;
